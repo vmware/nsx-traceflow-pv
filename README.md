@@ -20,7 +20,7 @@ Response
 	      "name": "HV2-VM2",
 	      "network": "vxw-dvs-226-virtualwire-10-sid-5002-App",
 	      "uuid": "501da9eb-62d4-33ac-4441-f598cbe138cd"
-   }]
+     }]
 }
 </code></pre>
 
