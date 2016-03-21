@@ -1,0 +1,47 @@
+[
+    {
+        "name": "Spine",
+        "parent": "null",
+        "info": "10.1.1.2",
+        "value": 10,
+        "type": "black",
+        "level": "",
+        "icon": "/Documents/Bootcamp Project/UI/leaf.png",
+        "children": [
+        
+                    {
+                "name": "Leaf/ToR",
+                "parent": "Spine",
+                "info": "10.1.1.2",
+                "icon": "/Documents/Bootcamp Project/UI/leaf.png",
+                "children": [
+                    {
+                        "name": "VTEP",
+                        "parent": "Spine",
+                        "info": "10.1.1.2",
+                        "icon": "/Documents/Bootcamp Project/UI/server.png"
+
+                    }
+                ]
+            },
+            {
+                "name": "Leaf/ToR",
+                "parent": "Spine",
+                "info": "this host is running on ..........",
+                "value": 15,
+                "type": "grey",
+                "level": "",
+                "icon": "/Documents/Bootcamp Project/UI/leaf.png",
+                "children": [
+                    {
+                        "name": "VTEP",
+                        "parent": "Leaf/ToR",
+                        "value": 5,
+                        "type": "steelblue",
+                        "level": ""
+                    }
+                ]
+            }
+        ]
+    }
+]

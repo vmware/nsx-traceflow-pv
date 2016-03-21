@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>Traceflow Route</title>
+      <style>
+         .node circle {
+         fill: #fff;
+         stroke: steelblue;
+         stroke-width: 5px;
+         }
+         .node text { font: 15px sans-serif; font-weight: bold;}
+         .link {
+         fill: none;
+         stroke: #867979;
+         stroke-width: 6px;
+         }
+         .node {
+         cursor: pointer;
+         }
+         .d3-tip {
+         line-height: 3;
+         font-weight: bold;
+         padding: 12px;
+         background: rgba(0, 0, 0, 0.8);
+         color: #fff;
+         border-radius: 2px;
+         }
+         /* Creates a small triangle extender for the tooltip */
+         .d3-tip:after {
+         box-sizing: border-box;
+         display: inline;
+         font-size: 10px;
+         width: 100%;
+         line-height: 1;
+         color: rgba(0, 0, 0, 0.8);
+         content: "\25BC";
+         position: absolute;
+         text-align: center;
+         }
+         /* Style northward tooltips differently */
+         .d3-tip.n:after {
+         margin: -1px 0 0 0;
+         top: 100%;
+         left: 0;
+         }
+      </style>
+   </head>
+   <body>
+      <!-- load the d3.js library --> 
+      <script src="http://d3js.org/d3.v3.min.js"></script>
+      <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+      <script>
+         // ************** Generate the tree diagram  *****************
+         var margin = {top: 150, right: 120, bottom: 20, left: 120},
+          width = 800 - margin.right - margin.left,
+          height = 800 - margin.top - margin.bottom;
+
+var orientation = {
+
+    size: [width, height],
+    x: function(d) { return d.x; },
+    y: function(d) { return height - d.y; }
+  
+};
+          
+         var i = 0;
+         
+         var tree = d3.layout.tree()
+          .size([height, width]);
+         
+         var diagonal = d3.svg.diagonal()
+          .projection(function(d) { return [orientation.x(d), orientation.y(d)]; });
+         
+         var svg2 = d3.select("body").append("svg")
+          .attr("width", width + margin.right + margin.left)
+          .attr("height", height + margin.top + margin.bottom)
+           .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  //         svg2.append("svg2:defs").selectAll("marker")
+  //   .data(["end"])      // Different link/path types can be defined here
+  // .enter().append("svg2:marker")    // This section adds in the arrows
+  //   .attr("id", String)
+  //   .attr("viewBox", "0 -5 10 10")
+  //   .attr("refX", 15)
+  //   .attr("refY", -1.5)
+  //   .attr("markerWidth", 6)
+  //   .attr("markerHeight", 6)
+  //   .attr("orient", "auto")
+  // .append("svg2:path")
+  //   .attr("d", "M0,-5L10,0L0,5")
+         
+         var tip = d3.tip()
+         .attr('class', 'd3-tip')
+         .offset([-10, 0])
+         .html(function(d) {
+         return "<strong>Value: </strong> <span style='color:red'>" + d.info + "</span>";
+         })
+         
+         svg2.call(tip);
+         
+         d3.json("/Documents/Bootcamp Project/UI/lower.json", function(error, treeData) {
+         
+          if (error) {
+                 console.log(error);
+                 alert(error);
+             }
+             else {
+            root = treeData[0];
+            update(root);
+          }
+         });
+
+
+       //        queue()
+       //  .defer(d3.json, '/Documents/Bootcamp Project/UI/treeData.json')
+       //  .defer(d3.json, '/Documents/Bootcamp Project/UI/treeData1.json')
+       //  .await(makeTree);
+
+
+       //   function makeTree(error, treeData, treeData1) {
+       //   //d3.json("/Documents/Bootcamp Project/UI/treeData.json", function(error, treeData) {
+         
+       //    if (error) {
+       //           console.log(error);
+       //           alert(error); // I would suggest a more sophisticated UI that just 
+       //                         // an alert box, but this suffices as an example.
+       //       }
+       //       else {
+       //      root = treeData[0];
+       //      update(root);
+
+       //      root = treeData1[0];
+       //      update(root);
+       //    }
+       // }
+         
+         
+         function update(source) {
+         
+           // Compute the new tree layout.
+           var nodes = tree.nodes(root).reverse(),
+            links = tree.links(nodes);
+         
+           // Normalize for fixed-depth.
+           nodes.forEach(function(d) { d.y = d.depth * 120; });
+         
+           // Declare the nodesâ€¦
+           var node = svg2.selectAll("g.node")
+            .data(nodes, function(d) { return d.id || (d.id = ++i); });
+         
+           // Enter the nodes.
+           var nodeEnter = node.enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function(d) { 
+             return "translate(" + orientation.x(d) + "," + + orientation.y(d) + ")"; })
+             .on("click", click);
+         
+         
+         
+                     nodeEnter.append("rect")
+            .style("fill", "#a4a4a4")
+            .attr("x", -8)
+            .attr("y", -8)
+            .attr("width", 180)
+            .attr("height", 50)
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide);
+         
+           nodeEnter.append("text")
+            .attr("y", function(d) { 
+             return d.children || d._children ? -13 : 13; })
+            .attr("dy", ".35em")
+            .attr("dx", -15)
+            .attr("text-anchor", function(d) { 
+             return d.children || d._children ? "end" : "start"; })
+            .text(function(d) { return d.name; })
+            .style("fill-opacity", 1);
+         
+           // Declare the links¦
+           var link = svg2.selectAll("path.link")
+            .data(links, function(d) { return d.target.id; });
+         
+           // Enter the links.
+           link.enter().insert("path", "g")
+            .attr("class", "link")
+            .style("stroke", function(d) { return d.target.level; })
+            .attr("d", diagonal);
+
+
+
+         }
+         
+                              function click(d) {
+  if (d.children) {
+  d._children = d.children;
+  d.children = null;
+  } else {
+  d.children = d._children;
+  d._children = null;
+  }
+  update(d);
+}
+
+
+      </script>
+   </body>
+</html>

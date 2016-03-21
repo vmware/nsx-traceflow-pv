@@ -1,0 +1,20 @@
+{
+    "switch_mgmt_interface_list" : [
+        {
+            "ip" : "10.114.211.7"
+        },
+        { 
+            "ip" : "10.114.211.5"
+        }
+    ],
+
+    "vm_network_filter" : "vxw-dvs",
+
+    "db_info" : {
+        "ip" : "localhost",
+        "username" : "root",
+        "password" : "19910423",
+        "db" : "ntrtool"
+    }
+
+}

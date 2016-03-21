@@ -1,0 +1,9 @@
+#!/bin/sh
+NAME=ntrtool
+DESC=ntrtool
+DEAMON=/usr/bin/ntrtool
+case $1 in
+start) nohup /usr/bin/ntrtool &
+;;
+stop) pkill -f ntrtool
+esac

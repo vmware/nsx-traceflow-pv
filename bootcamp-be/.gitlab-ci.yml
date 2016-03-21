@@ -1,0 +1,17 @@
+test:
+  script:
+  # this configures django application to use attached postgres database that is run on `postgres` host
+  - sudo apt-get install -y python-dev python-setuptools 
+  - cd build
+  - ./build.sh
+  - sudo dpkg -i *.deb
+
+staging:
+  type: deploy
+  script:
+  - echo 
+
+production:
+  type: deploy
+  script:
+  - echo

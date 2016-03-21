@@ -1,0 +1,95 @@
+[
+    {
+        "name": "Spine",
+        "parent": "null",
+        "info": "10.1.1.2",
+        "value": 10,
+        "type": "black",
+        "level": "red",
+        "children": [
+            {
+                "name": "Leaf 2.1",
+                "parent": "Spine",
+                "info": "this host is running on ..........",
+                "value": 15,
+                "type": "grey",
+                "level": "red",
+                "children": [
+                    {
+                        "name": "Host1",
+                        "parent": "Leaf 2",
+                        "value": 5,
+                        "type": "steelblue",
+                        "level": "orange",
+                        "children": [
+                            {
+                                "name": "Firewall",
+                                "parent": "Host1",
+                                "info": "10.1.1.2",
+                                "level": "green",
+                                "children": [
+                                    {
+                                        "name": "Destination VM",
+                                        "parent": "Firewall",
+                                        "level": "green",
+                                        "info": "10.1.1.2"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Leaf 1",
+                "parent": "Spine",
+                "info": "10.1.1.2",
+                "children": [
+                    {
+                        "name": "Host",
+                        "parent": "Spine",
+                        "info": "10.1.1.2",
+                        "children": [
+                            {
+                                "name": "Logical Switch 2",
+                                "parent": "Host",
+                                "info": "10.1.1.2",
+                                "children": [
+                                    {
+                                        "name": "Router",
+                                        "parent": "Logical Switch 2",
+                                        "info": "10.1.1.2",
+                                        "level": "green",
+                                        "value": 1,
+                                        "children": [
+                                            {
+                                                "name": "Logical Switch 1",
+                                                "parent": "Router",
+                                                "info": "10.1.1.2",
+                                                "children": [
+                                                    {
+                                                        "name": "Firewall",
+                                                        "parent": "Logical Switch 1",
+                                                        "info": "10.1.1.2",
+                                                        "level": "green",
+                                                        "children": [
+                                                            {
+                                                                "name": "Source VM",
+                                                                "parent": "Firewall",
+                                                                "info": "10.1.1.2"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

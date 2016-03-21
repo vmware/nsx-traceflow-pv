@@ -1,0 +1,65 @@
+[
+    {
+        "name": "Logical Switch App",
+        "parent": "null",
+        "info": "10.1.1.2",
+        "value": 10,
+        "type": "black",
+        "level": "red",
+        "icon": "/Documents/Bootcamp Project/UI/a.png",
+        "children": [
+        
+                    {
+                "name": "Router",
+                "parent": "Logical Switch App",
+                "info": "10.1.1.2",
+                "icon": "/Documents/Bootcamp Project/UI/routing.png",
+                "children": [
+                    {
+                        "name": "Logical Switch Web",
+                        "parent": "Router",
+                        "info": "10.1.1.2",
+                        "icon": "/Documents/Bootcamp Project/UI/Logical.png",
+                        "children": [
+                            {
+                                "name": "Firewall",
+                                "parent": "Logical switch Web",
+                                "info": "10.1.1.2",
+                                "icon": "/Documents/Bootcamp Project/UI/Firewall.png",
+                                "children": [
+                                    {
+                                        "name": "VM1",
+                                        "parent": "Firewall",
+                                        "info": "10.1.1.2",
+                                        "level": "",
+                                        "icon": "/Documents/Bootcamp Project/UI/VM2.png",
+                                        "value": 1
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Firewall",
+                "parent": "Logical Switch App",
+                "info": "this host is running on ..........",
+                "value": 15,
+                "type": "grey",
+                "level": "",
+                "icon": "/Documents/Bootcamp Project/UI/Firewall.png",
+                "children": [
+                    {
+                        "name": "VM2",
+                        "parent": "Firewall",
+                        "value": 5,
+                        "type": "steelblue",
+                        "level": "",
+                        "icon": "/Documents/Bootcamp Project/UI/VM2.png"
+                    }
+                ]
+            }
+        ]
+    }
+]

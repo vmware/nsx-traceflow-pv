@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+   <!-- jQuery library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+   <!-- Latest compiled JavaScript -->
+   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+   <head>
+      <meta charset="utf-8">
+   </head>
+   <body >
+      <div ng-app="myApp" ng-controller="vmCtrl">
+         <div id="wrapper">
+            <div class="container">
+               <img src="nsx.png" width="100%" >
+            </div>
+            <!-- Sidebar
+            <div id="sidebar-wrapper">
+               <ul class="sidebar-nav">
+                  <li class="sidebar-brand">
+                     <a href="#">
+                     Start Bootstrap
+                     </a>
+                  </li>
+                  <li>
+                     <a href="#">Dashboard</a>
+                  </li>
+                  <li>
+                     <a href="#">Shortcuts</a>
+                  </li>
+                  <li>
+                     <a href="#">Overview</a>
+                  </li>
+                  <li>
+                     <a href="#">Events</a>
+                  </li>
+                  <li>
+                     <a href="#">About</a>
+                  </li>
+                  <li>
+                     <a href="#">Services</a>
+                  </li>
+                  <li>
+                     <a href="#">Contact</a>
+                  </li>
+               </ul>
+            </div>-->
+            <div class="container"  >
+               <!-- Page Header -->
+               <div class="row">
+                  <div class="col-lg-12">
+                     <h1 class="page-header">Trace your packet
+                     </h1>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-4">
+                     <div class="panel panel-primary ">
+                        <div class="panel-heading">Select source and destination machines</div>
+                        <div class="panel-body">
+                           <div class="simple-form">
+                              Source Virtual Machine:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <select name="sourceVMId" align="center" ng-model="sourceVM" id="sourceVMId">
+                                 <option ng:repeat="s in machines" value="{{s}}">{{s.name}}</option>
+                              </select>
+                              <br>
+                              <br> Destination Virtual Machine:
+                              <select name="destVMId" align="center" ng-model="destVM" id="d">
+                                 <option ng:repeat="d in machines" value="{{d}}">{{d.name}}</option>
+                              </select>
+                              <br>
+                              <br>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="panel panel-primary ">
+                        <div class="panel-heading">NSX</div>
+                        <div class="panel-body">
+                           <div class="simple-form">
+                              Username:
+                              <input type="text" ng-model="nsxusr">
+                              <br>
+                              <br> Password:&nbsp;
+                              <input type="password" ng-model="nsxpwd">
+                              <br>
+                              <br>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-4">
+                     <div class="panel panel-primary ">
+                        <div class="panel-heading">vCenter</div>
+                        <div class="panel-body">
+                           <form class="panel-body">
+                              Username:
+                              <input type="text" ng-model="vcenterusr">
+                              <br>
+                              <br> Password:&nbsp;
+                              <input type="password" ng-model="vcenterpwd">
+                              <br>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="panel panel-primary ">
+                        <div class="panel-heading">Physical Devices</div>
+                        <div class="panel-body">
+                           <form class="panel-body">
+                              Username:
+                              <input type="text" ng-model="phyusr">
+                              <br>
+                              <br>Password:&nbsp;
+                              <input type="password" ng-model="phypwd">
+                              <br>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" align="center" class="btn btn-success" ng-click="submitForm(true)">Start Traceflow</button>
+            </div>
+         </div>
+      </div>
+      <script>
+         var app = angular.module('myApp', []);
+
+         app.controller('vmCtrl', function($scope,$q,$http,$location) {
+             $http.get('http://10.34.226.46:5000/api/vms').then(function(response) {
+
+                 $scope.machines = response.data.vms;
+
+             });
+             $scope.submitForm = function(isValid) {
+                 var deferred = $q.defer();
+                 if (isValid) {
+
+                     var req = {
+                         method: 'POST',
+                         url: 'http://10.34.226.46:5000/api/traceflow/html',
+                         headers: {
+                             'Content-Type': 'application/json'
+                         },
+                         data: {
+                             "vm1": JSON.parse($scope.sourceVM),
+                             "vm2": JSON.parse($scope.destVM),
+                             "nsxusr":$scope.nsxusr,
+                             "nsxpwd":$scope.nsxpwd,
+                             "vcenterusr":$scope.vcenterusr,
+                             "vcenterpwd":$scope.vcenterpwd,
+                             "phyusr":$scope.phyusr,
+                             "phypwd":$scope.phypwd
+                         }
+                     }
+
+                     $http(req).then(function(response, status, headers, config) {
+
+
+                              $location.url(response.data);
+
+
+                         },
+                         function(data, status, header, config) {
+                             $scope.ResponseDetails = "Data: " + data +
+                                 "<hr />status: " + status +
+                                 "<hr />headers: " + header +
+                                 "<hr />config: " + config;
+                         });
+                 } else {
+                     alert("Source and destination virtual machines can't be same")
+                 }
+             };
+         });
+      </script>
+   </body>
+</html>

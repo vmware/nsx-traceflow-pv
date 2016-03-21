@@ -1,0 +1,132 @@
+{
+  "batchid": null,
+  "completed": true,
+  "info": {
+    "vm1": {
+      "ip": "20.20.20.1",
+      "mac": "00:50:56:a0:94:dd",
+      "name": "HV1-VM1",
+      "network": "vxw-dvs-226-virtualwire-9-sid-5001-Web",
+      "uuid": "5020f282-fc80-989e-f690-6329b31cb9e1"
+    },
+    "vm2": {
+      "ip": "30.30.30.1",
+      "mac": "00:50:56:9d:c7:fa",
+      "name": "HV2-VM1",
+      "network": "vxw-dvs-226-virtualwire-10-sid-5002-App",
+      "uuid": "501dab8b-6781-794c-fd4b-c9ef774f7c7a"
+    }
+  },
+  "port": "52106",
+  "result": [
+    {
+      "compDisplayName": "vNIC",
+      "component": "PHYS",
+      "hopCount": 0,
+      "hostId": "host-443",
+      "hostName": "pod01-host01.nsx.eng.vmware.com",
+      "transportNodeId": "a0b1454a-e259-4521-ae7a-31ebe9e98dc8"
+    },
+    {
+      "compDisplayName": "Firewall",
+      "component": "FW",
+      "hopCount": 1,
+      "hostId": "host-443",
+      "hostName": "pod01-host01.nsx.eng.vmware.com",
+      "transportNodeId": "a0b1454a-e259-4521-ae7a-31ebe9e98dc8"
+    },
+    {
+      "compDisplayName": "Firewall",
+      "component": "FW",
+      "hopCount": 2,
+      "hostId": "host-443",
+      "hostName": "pod01-host01.nsx.eng.vmware.com",
+      "transportNodeId": "a0b1454a-e259-4521-ae7a-31ebe9e98dc8"
+    },
+    {
+      "compDisplayName": "Web",
+      "component": "LS",
+      "hopCount": 3,
+      "hostId": "host-443",
+      "hostName": "pod01-host01.nsx.eng.vmware.com",
+      "transportNodeId": "a0b1454a-e259-4521-ae7a-31ebe9e98dc8"
+    },
+    {
+      "compDisplayName": "NSX Bridge",
+      "component": "LR",
+      "hopCount": 4,
+      "hostId": "host-443",
+      "hostName": "pod01-host01.nsx.eng.vmware.com",
+      "transportNodeId": "a0b1454a-e259-4521-ae7a-31ebe9e98dc8"
+    },
+    {
+      "compDisplayName": "NSX Bridge",
+      "component": "LR",
+      "hopCount": 5,
+      "hostId": "host-443",
+      "hostName": "pod01-host01.nsx.eng.vmware.com",
+      "transportNodeId": "a0b1454a-e259-4521-ae7a-31ebe9e98dc8"
+    },
+    {
+      "compDisplayName": "App",
+      "component": "LS",
+      "hopCount": 6,
+      "hostId": "host-443",
+      "hostName": "pod01-host01.nsx.eng.vmware.com",
+      "transportNodeId": "a0b1454a-e259-4521-ae7a-31ebe9e98dc8"
+    },
+    {
+      "compDisplayName": "pod01-host01.nsx.eng.vmware.com",
+      "component": "PHYS",
+      "hopCount": 7,
+      "hostId": "host-443",
+      "hostName": "pod01-host01.nsx.eng.vmware.com",
+      "transportNodeId": "a0b1454a-e259-4521-ae7a-31ebe9e98dc8"
+    },
+    {
+      "compDisplayName": "pod01-host02.nsx.eng.vmware.com",
+      "component": "PHYS",
+      "hopCount": 8,
+      "hostId": "host-403",
+      "hostName": "pod01-host02.nsx.eng.vmware.com",
+      "transportNodeId": "a68363e3-fe4e-4d04-9485-b0d31de9941a"
+    },
+    {
+      "compDisplayName": "Firewall",
+      "component": "FW",
+      "hopCount": 9,
+      "hostId": "host-403",
+      "hostName": "pod01-host02.nsx.eng.vmware.com",
+      "transportNodeId": "a68363e3-fe4e-4d04-9485-b0d31de9941a"
+    },
+    {
+      "compDisplayName": "Firewall",
+      "component": "FW",
+      "hopCount": 10,
+      "hostId": "host-403",
+      "hostName": "pod01-host02.nsx.eng.vmware.com",
+      "transportNodeId": "a68363e3-fe4e-4d04-9485-b0d31de9941a"
+    },
+    {
+      "compDisplayName": "vNIC",
+      "component": "PHYS",
+      "hopCount": 11,
+      "hostId": "host-403",
+      "hostName": "pod01-host02.nsx.eng.vmware.com",
+      "transportNodeId": "a68363e3-fe4e-4d04-9485-b0d31de9941a"
+    }
+  ],
+  "returned_dictionary": {
+    "10.114.211.5": [
+      0,
+      0,
+      513
+    ],
+    "10.114.211.7": [
+      0,
+      0,
+      28066
+    ]
+  },
+  "success": true
+}

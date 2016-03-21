@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+sudo easy_install pip
+sudo pip install flask
+sudo pip install -U flask-cors
+sudo pip install lxml
+sudo pip install requests
+sudo pip install jsonrpclib
+
+cd /etc/nsx-traceflow-tool/pyvmomi
+sudo python setup.py install
